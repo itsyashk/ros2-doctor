@@ -1,0 +1,21 @@
+{
+  "name": "ros2-doctor",
+  "version": "0.1.0",
+  "description": "Claude Code skill for diagnosing ROS 2 workspace build, launch, sourcing, TF, URDF/RViz, dependency, distro, and interface-generation issues.",
+  "author": {
+    "name": "Yash K"
+  },
+  "homepage": "https://github.com/itsyashk/ros2-doctor",
+  "repository": "https://github.com/itsyashk/ros2-doctor",
+  "license": "MIT",
+  "keywords": [
+    "ros2",
+    "robotics",
+    "colcon",
+    "tf2",
+    "rviz",
+    "urdf",
+    "claude-code-skill"
+  ],
+  "skills": "./skills/"
+}

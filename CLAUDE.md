@@ -7,3 +7,10 @@ ROS 2 installation.
 When editing skill content, prefer source-backed playbook updates over broad
 rewrites, preserve the documented playbook section structure, and keep
 community/forum material paraphrased with attribution in `SOURCES.md`.
+
+The skill exists in two install layouts:
+
+- `.claude/skills/ros2-doctor/` for direct local skill installation.
+- `plugins/ros2-doctor/skills/ros2-doctor/` for Claude Code plugin marketplace installation.
+
+When changing skill files, keep both copies synchronized before committing.

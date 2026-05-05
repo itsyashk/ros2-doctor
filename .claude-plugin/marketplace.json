@@ -1,0 +1,39 @@
+{
+  "name": "ros2-doctor",
+  "owner": {
+    "name": "Yash K"
+  },
+  "metadata": {
+    "description": "Claude Code plugin marketplace for ROS 2 debugging skills.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "ros2-doctor",
+      "source": "./plugins/ros2-doctor",
+      "description": "Debug ROS 2 workspaces with source-backed playbooks, checklists, templates, and a read-only workspace scanner.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Yash K"
+      },
+      "homepage": "https://github.com/itsyashk/ros2-doctor",
+      "repository": "https://github.com/itsyashk/ros2-doctor",
+      "license": "MIT",
+      "keywords": [
+        "ros2",
+        "robotics",
+        "colcon",
+        "tf2",
+        "rviz",
+        "urdf",
+        "claude-code-skill"
+      ],
+      "category": "development",
+      "tags": [
+        "ros2",
+        "debugging",
+        "robotics"
+      ]
+    }
+  ]
+}

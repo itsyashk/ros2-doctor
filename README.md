@@ -35,6 +35,31 @@ explain what it checked, what looks suspicious, and how to verify a fix.
 
 ## Installation
 
+### Install as a Claude Code plugin marketplace
+
+Add this repository as a plugin marketplace:
+
+```text
+/plugin marketplace add itsyashk/ros2-doctor
+```
+
+Install the plugin:
+
+```text
+/plugin install ros2-doctor@ros2-doctor
+```
+
+Restart Claude Code after installation if prompted.
+
+For local marketplace testing from a clone:
+
+```text
+/plugin marketplace add /path/to/ros2-doctor
+/plugin install ros2-doctor@ros2-doctor
+```
+
+### Install as a local skill
+
 Clone this repository:
 
 ```bash
@@ -75,6 +100,14 @@ forum fixes into a different workspace without checking the evidence.
 |-- .claude/
 |   `-- skills/
 |       `-- ros2-doctor/
+|-- .claude-plugin/
+|   `-- marketplace.json
+|-- plugins/
+|   `-- ros2-doctor/
+|       |-- .claude-plugin/
+|       |   `-- plugin.json
+|       `-- skills/
+|           `-- ros2-doctor/
 |           |-- SKILL.md
 |           |-- checklists/
 |           |-- playbooks/
@@ -94,6 +127,8 @@ forum fixes into a different workspace without checking the evidence.
 - `templates/` contains report and fix-plan formats.
 - `references/` contains source-backed background notes.
 - `scripts/ros2_workspace_scan.py` prints a read-only markdown workspace scan.
+- `.claude-plugin/marketplace.json` makes this repo installable as a Claude Code plugin marketplace.
+- `plugins/ros2-doctor/` contains the marketplace plugin package.
 - `SOURCES.md` preserves source attribution.
 - `CLAUDE.md` contains repository maintenance notes for Claude Code agents.
 
