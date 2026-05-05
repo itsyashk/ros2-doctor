@@ -83,15 +83,27 @@ cp -R /path/to/ros2-doctor/.claude/skills/ros2-doctor ~/.claude/skills/
 After installation, restart Claude Code or reload skills according to your local
 Claude Code workflow.
 
-## Philosophy
+## How It Works
 
-```text
-Understand first. Edit second. Fix minimally. Verify clearly.
-```
+After installation, Claude Code can use `ros2-doctor` when a prompt involves
+ROS 2 debugging. The skill gives Claude a strict workflow:
 
-The skill is designed to avoid common debugging traps: guessing the distro,
-deleting build artifacts too early, changing package names casually, or copying
-forum fixes into a different workspace without checking the evidence.
+1. Inspect the workspace before editing.
+2. Identify the ROS 2 distro from the environment, Docker/devcontainer files,
+   CI, setup scripts, logs, and package metadata.
+3. Classify package types such as `ament_python`, `ament_cmake`, interface
+   packages, launch-only packages, and robot description packages.
+4. Route the problem to a focused playbook.
+5. Produce a diagnosis with evidence, a minimal fix, and exact verification
+   commands.
+
+For larger or unclear workspaces, the skill can use
+`scripts/ros2_workspace_scan.py`. The scanner is read-only, uses only the Python
+standard library, does not require ROS 2 to be installed, and prints markdown
+that can be pasted into a debug report.
+
+The guiding rule is still simple: understand first, edit second, fix minimally,
+and verify clearly.
 
 ## Repository layout
 
