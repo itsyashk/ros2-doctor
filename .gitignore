@@ -1,6 +1,26 @@
-# Claude
-CLAUDE.MD
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+.venv/
+venv/
 
-# Context
-reserach
-MOTIVATION.md
+# Local/editor files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+.env
+.env.*
+
+# Generated ROS/colcon workspace artifacts
+install/
+log/
