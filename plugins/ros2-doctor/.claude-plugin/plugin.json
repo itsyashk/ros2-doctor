@@ -1,7 +1,7 @@
 {
   "name": "ros2-doctor",
   "version": "0.1.0",
-  "description": "Claude Code skill for diagnosing ROS 2 workspace build, launch, sourcing, TF, URDF/RViz, dependency, distro, and interface-generation issues.",
+  "description": "ROS 2 debugging skill plus ros2-doctor CLI for workspace build, launch, sourcing, TF, deps, and diagnostics.",
   "author": {
     "name": "Yash K"
   },

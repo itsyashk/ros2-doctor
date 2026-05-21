@@ -70,17 +70,18 @@ Keep detailed procedures in supporting files. Load only the most relevant resour
 - `checklists/first-pass-triage.md`: initial scan before choosing a playbook.
 - `references/`: source-backed background notes.
 
-## When To Use Python Scanner
+## When To Use the CLI or Scanner
 
-Use `scripts/ros2_workspace_scan.py` from the workspace root when:
+Prefer the **`ros2-doctor` CLI** when installed (`pip install ros2-doctor`):
 
-- the workspace has multiple packages,
-- package type or distro evidence is unclear,
-- errors mention install layout, entry points, interfaces, launch files, or resources,
-- the user needs a shareable debug report.
+- `ros2-doctor doctor` — full diagnostic checks
+- `ros2-doctor report -o DEBUG_REPORT.md` — markdown report
+- `ros2-doctor explain-error --file log.txt` — classify errors without an LLM
 
-The scanner is read-only and does not require ROS 2 to be installed. Treat its
-output as evidence, not authority.
+Fallback: `scripts/ros2_workspace_scan.py` from the workspace root (read-only,
+stdlib-only, no ROS 2 required). Use when the CLI is not installed.
+
+Treat scanner/CLI output as evidence, not authority.
 
 ## Output Format
 

@@ -1,0 +1,143 @@
+[[pattern]]
+id = "rosdep_missing_key"
+category = "dependency"
+regex = "Cannot locate rosdep definition for \\[(?P<key>[^\\]]+)\\]"
+playbook = "dependency-errors"
+cause = "rosdep has no rule for this key on your OS/distro."
+fix_template = "rosdep resolve {key} --rosdistro $ROS_DISTRO"
+
+[[pattern]]
+id = "rosdep_no_definition"
+category = "dependency"
+regex = "No definition of \\[(?P<key>[^\\]]+)\\] for OS"
+playbook = "dependency-errors"
+cause = "The dependency key is not defined for your OS version."
+fix_template = "rosdep update && rosdep check --from-paths src --ignore-src --rosdistro $ROS_DISTRO"
+
+[[pattern]]
+id = "apt_package_missing"
+category = "dependency"
+regex = "Unable to locate package ros-(?P<distro>\\w+)-(?P<pkg>[\\w-]+)"
+playbook = "dependency-errors"
+cause = "The ROS package is not available via apt for this distro."
+fix_template = "apt-cache policy ros-{distro}-{pkg}"
+
+[[pattern]]
+id = "cmake_package_config"
+category = "build"
+regex = "Could not find a package configuration file provided by \"(?P<dep>[^\"]+)\""
+playbook = "colcon-build-errors"
+cause = "CMake cannot find a dependency — missing install, wrong package.xml, or overlay not sourced."
+fix_template = "ros2 pkg prefix {dep} || rosdep install --from-paths src --ignore-src --rosdistro $ROS_DISTRO"
+
+[[pattern]]
+id = "module_not_found"
+category = "python"
+regex = "ModuleNotFoundError: No module named '(?P<mod>[^']+)'"
+playbook = "python-package-errors"
+cause = "Python cannot import the module — missing dependency or overlay not sourced."
+fix_template = "source install/setup.bash && python3 -c \"import {mod}\""
+
+[[pattern]]
+id = "package_not_found"
+category = "workspace"
+regex = "Package '(?P<pkg>[^']+)' not found"
+playbook = "workspace-sourcing-errors"
+cause = "ROS cannot find the package — build, source overlay, or wrong workspace."
+fix_template = "source install/setup.bash && ros2 pkg prefix {pkg}"
+
+[[pattern]]
+id = "ros2_not_found"
+category = "workspace"
+regex = "ros2: command not found"
+playbook = "workspace-sourcing-errors"
+cause = "ROS 2 is not installed or not sourced in this shell."
+fix_template = "source /opt/ros/$ROS_DISTRO/setup.bash"
+
+[[pattern]]
+id = "launch_file_not_found"
+category = "launch"
+regex = "file '(?P<file>[^']+)' was not found in the share directory of package '(?P<pkg>[^']+)'"
+playbook = "launch-file-errors"
+cause = "Launch file was not installed to share/<pkg>/launch."
+fix_template = "colcon build --packages-select {pkg} --symlink-install && source install/setup.bash"
+
+[[pattern]]
+id = "launch_package_not_found"
+category = "launch"
+regex = "PackageNotFoundError: \"(?P<pkg>[^']+)\""
+playbook = "launch-file-errors"
+cause = "Launch cannot resolve an ament package name."
+fix_template = "source install/setup.bash && ros2 pkg prefix {pkg}"
+
+[[pattern]]
+id = "launch_executable_missing"
+category = "launch"
+regex = "executable '(?P<exe>[^']+)' not found on the libexec directory"
+playbook = "launch-file-errors"
+cause = "Node executable name does not match installed binary or console_scripts."
+fix_template = "ros2 pkg executables <pkg>"
+
+[[pattern]]
+id = "launch_import_launch"
+category = "launch"
+regex = "ModuleNotFoundError: No module named 'launch'"
+playbook = "launch-file-errors"
+cause = "A local file or package named launch may shadow ROS 2 launch."
+fix_template = "python3 -c \"import launch; print(launch.__file__)\""
+
+[[pattern]]
+id = "tf_extrapolation_future"
+category = "tf"
+regex = "Lookup would require extrapolation into the future"
+playbook = "tf-errors"
+cause = "Transform timestamp is ahead of available TF data — check use_sim_time and broadcaster rate."
+fix_template = "ros2 param get <node> use_sim_time"
+
+[[pattern]]
+id = "tf_frame_missing"
+category = "tf"
+regex = "frame does not exist|Could not transform from \\[(?P<a>[^\\]]+)\\] to \\[(?P<b>[^\\]]+)\\]"
+playbook = "tf-errors"
+cause = "Required TF frame is not being published."
+fix_template = "ros2 run tf2_tools view_frames"
+
+[[pattern]]
+id = "colcon_zero_packages"
+category = "build"
+regex = "Summary: 0 packages finished"
+playbook = "colcon-build-errors"
+cause = "colcon did not build any packages — wrong directory or empty workspace."
+fix_template = "cd <workspace-root> && colcon list"
+
+[[pattern]]
+id = "undefined_reference"
+category = "cpp"
+regex = "undefined reference to"
+playbook = "cpp-package-errors"
+cause = "Linker error — missing library linkage in CMakeLists.txt."
+fix_template = "colcon build --packages-select <pkg> --event-handlers console_direct+"
+
+[[pattern]]
+id = "header_not_found"
+category = "cpp"
+regex = "fatal error: (?P<header>[^:]+): No such file or directory"
+playbook = "cpp-package-errors"
+cause = "C++ header not found — missing depend or include path."
+fix_template = "Add depend to package.xml and find_package() in CMakeLists.txt"
+
+[[pattern]]
+id = "rosidl_invalid"
+category = "interfaces"
+regex = "InvalidResourceName|InvalidFieldDefinition|rosidl_adapter"
+playbook = "message-service-action-errors"
+cause = "Message/service/action definition has invalid syntax."
+fix_template = "colcon build --packages-select <interface_pkg> --symlink-install"
+
+[[pattern]]
+id = "no_executable"
+category = "runtime"
+regex = "No executable found"
+playbook = "python-package-errors"
+cause = "ros2 run cannot find the executable — check console_scripts and sourcing."
+fix_template = "ros2 pkg executables <pkg>"

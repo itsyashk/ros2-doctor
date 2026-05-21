@@ -1,0 +1,30 @@
+name: Bug report
+description: Report a problem with ros2-doctor CLI
+body:
+  - type: input
+    id: version
+    attributes:
+      label: ros2-doctor version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: OS / ROS distro
+      placeholder: "Ubuntu 22.04, ROS 2 Humble"
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command you ran
+      placeholder: "ros2-doctor doctor"
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Output or error
+    validations:
+      required: true
